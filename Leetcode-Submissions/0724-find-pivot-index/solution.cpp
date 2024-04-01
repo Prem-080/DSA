@@ -6,8 +6,8 @@ public:
        int leftSum = 0;
        
         for(int i = 0; i < nums.size(); i++){
-          
-           if(leftSum ==  total - leftSum - nums[i]){
+          total -= nums[i];
+           if(leftSum ==  total){
                return i;
            }
         leftSum += nums[i];
