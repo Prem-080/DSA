@@ -1,7 +1,7 @@
 class Solution {
 public:
     int pivotIndex(vector<int>& nums) {
-        int total = accumulate(nums.begin(),nums.end(),0);
+        int total = sum(nums);
         
        int leftSum = 0;
        
@@ -13,5 +13,12 @@ public:
         leftSum += nums[i];
         }
        return -1;
+    }
+    int sum(vector<int>& nums){
+        int sum = 0;
+        for(int i = 0; i < nums.size(); i++){
+            sum+=nums[i];
+        }
+        return sum;
     }
 };
