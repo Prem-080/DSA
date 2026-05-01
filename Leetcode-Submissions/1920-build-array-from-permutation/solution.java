@@ -1,10 +1,12 @@
 class Solution {
     public int[] buildArray(int[] nums) {
-        int i = 0, n = nums.length;
-        int[] ans = new int[n];
-        for(i = i; i < n; i++){
-            ans[i] = nums[nums[i]];
-        }
-        return ans;
+        for (int i = 0; i < nums.length; i++)
+            nums[i] += (1024 * (nums[nums[i]] % 1024));
+        
+        for (int i = 0; i < nums.length; i++)
+            nums[i] /= 1024;
+        
+        return nums;
     }
 }
+
