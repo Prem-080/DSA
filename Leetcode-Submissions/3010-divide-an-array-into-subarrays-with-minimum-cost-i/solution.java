@@ -1,6 +1,5 @@
 class Solution {
     public int minimumCost(int[] nums) {
-        int first = nums[0];
         int num1 = Integer.MAX_VALUE, num2 = Integer.MAX_VALUE; 
         for(int i = 1; i < nums.length; i++){
             if(nums[i] < num1){
@@ -11,6 +10,6 @@ class Solution {
                 num2 = nums[i];
             }
         }
-        return first + num1 + num2;
+        return nums[0] + num1 + num2;
     }
 }
