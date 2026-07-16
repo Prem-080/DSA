@@ -1,10 +1,7 @@
 class Node{
     int val;
     Node next;
-
-    Node(){
-        this.next = null;
-    }
+    
     Node(int data){
         this(data, null);
     }
