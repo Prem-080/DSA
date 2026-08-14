@@ -1,20 +1,17 @@
 class Solution {
     public int[] twoSum(int[] numbers, int target) {
-        for(int i = 0; i < numbers.length - 1; i++){
-            int complement = target - numbers[i];
-            int l = i + 1, r = numbers.length - 1;
-            while(l <= r){
-                int mid = l + (r - l) / 2;
-                if(numbers[mid] == complement){
-                    return new int[] {i + 1, mid + 1};
+            int l = 0, r = numbers.length - 1;
+
+            while(l < r){
+                if(numbers[l] + numbers[r] == target){
+                    return new int[] {l + 1, r + 1};
                 }
-                else if(numbers[mid] > complement){
-                    r = mid - 1;
+                else if(numbers[l] + numbers[r] > target){
+                    r--;
                 }
                 else{
-                    l = mid + 1;
+                    l++;
                 }
-            }
         }
         return new int[] {0, 0};
     }
