@@ -1,31 +1,32 @@
 class Solution {
     public int[] intersect(int[] nums1, int[] nums2) {
-        int i = 0, j = 0, k = 0;;
-        int n = nums1.length < nums2.length ? nums1.length : nums2.length;
+        HashMap<Integer, Integer> mp1 = new HashMap<>();
+        HashMap<Integer, Integer> mp2 = new HashMap<>();
+        HashSet<Integer> set = new HashSet<>();
+        for(int num: nums1){
+            mp1.put(num, mp1.getOrDefault(num, 0) + 1);
+            set.add(num);
+        }
+        for(int num: nums2){
+            mp2.put(num, mp2.getOrDefault(num, 0) + 1);
+        }
         ArrayList<Integer> res = new ArrayList<>();
-        Arrays.sort(nums1);
-        Arrays.sort(nums2);
-
-        while(i < nums1.length && j < nums2.length){
-                if(nums1[i] == nums2[j]){
-                    res.add(nums1[i]);
-                    i++;
-                    j++;
+        for(int i: set){
+            if(mp1.containsKey(i) && mp2.containsKey(i)){
+                int min = Math.min(mp1.get(i) , mp2.get(i));
+                while(min != 0){
+                    res.add(i);
+                    min--;
                 }
-                else if(nums1[i] < nums2[j]){
-                    i++;
-                }
-                else{
-                    j++;
-                }
-        }
-        int[] resArray = new int[res.size()];
-
-        for(i = 0; i < res.size(); i++){
-            resArray[i] = res.get(i);
+            }
         }
 
-        return resArray;
+        int[] ans = new int[res.size()];
+        int i = 0;
+        for(int num: res){
+            ans[i++] = num;
+        }
+
+        return ans;
     }
-
 }
