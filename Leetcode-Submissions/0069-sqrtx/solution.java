@@ -1,22 +1,24 @@
 class Solution {
     public int mySqrt(int x) {
-        int a = 1, b = x, mid = a + (x - a) / 2;
-        int sqrt = 0;
-        while(a <= b){
+        int res = 1;
+        int low = 1, high = x - 1;
+        if(x == 0){
+            return 0;
+        }
+        while(low <= high){
+            int mid = low + (high - low)/ 2;
             if(mid == x / mid){
-                return mid;
+                res = mid;
+                break;
             }
-            else if(mid < x / mid){
-                sqrt = mid;
-                a = mid + 1;
+            else if(mid < x/mid){
+                res = mid;
+                low = mid + 1;
             }
             else{
-                b = mid - 1;
+                high = mid - 1;
             }
-            mid = a + (b - a) / 2;
-
         }
-        return sqrt;
-
+        return res;
     }
 }
