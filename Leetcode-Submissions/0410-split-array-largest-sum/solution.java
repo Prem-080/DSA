@@ -1,40 +1,38 @@
 class Solution {
-    public int splitArray(int[] nums, int k) {
-        int st = 0, en = 0, n = nums.length - 1;
-        int sum = 0, max = -1;
-        for(int i = 0; i <= n; i++){
-            if(nums[i] > st) {
-                st = nums[i];
-            }
-            en += nums[i];
-        }
 
-        while(st < en){
-            // try for mid as potential answer
-            int mid = st + (en - st) / 2;
-
-            //calculate how many pieces you can divide with this mid.
-            sum = 0;
-            int pieces = 1;
-            for(int num : nums){
-                if(sum + num > mid){
-                    sum = num;
-                    pieces++;
-                }
-                else{
-                    sum += num;
-                }
-            }
-
-            if(pieces <= k){
-                en = mid;
+    boolean feasible(int threshold, int[] arr, int k){
+        int count = 1;
+        int sum = 0;    
+        for(int num: arr){
+            if(sum + num <= threshold){
+                sum += num;
             }
             else{
-                st = mid + 1;
+                if(count >= k){
+                    return false;
+                }
+                sum = num;
+                count++;
             }
         }
+        return true;
+    }
+    public int splitArray(int[] nums, int k) {
+        int max = -1, sum = 0;
+        for(int num: nums){
+            if(num > max) max = num;
+            sum+=num;
+        }
+        int l = max, r = sum;
+        while(l < r){
+            int mid = l + (r - l) / 2;
+            if(feasible(mid, nums, k)){
+                r = mid;
+            }else{
+                l = mid + 1;
+            }
+        }
+        return l;
 
-
-        return en; // here start == end
     }
 }
