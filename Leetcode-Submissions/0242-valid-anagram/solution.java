@@ -9,11 +9,8 @@ class Solution {
         }
         for (char ch: t.toCharArray()) {
             freq[ch - 'a']--;
+            if(freq[ch - 'a'] < 0) return false;
         }
-
-        for (int i = 0; i < 26; i++)
-            if (freq[i] != 0)
-                return false;
         return true;
     }
 }
