@@ -1,9 +1,9 @@
 class Solution {
     public int maxDepth(String s) {
         int p = 0, ans = 0;
-        for(char ch: s.toCharArray()){
-            if(ch == '(') p++;
-            else if(ch == ')') p--;
+        for(int i = 0; i < s.length(); i++){
+            if(s.charAt(i) == '(') p++;
+            else if(s.charAt(i) == ')') p--;
             ans = Math.max(ans, p);
         }
         return ans;
