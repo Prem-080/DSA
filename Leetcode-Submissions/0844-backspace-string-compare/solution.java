@@ -1,31 +1,53 @@
 class Solution {
     public boolean backspaceCompare(String s, String t) {
-        Stack<Character> stack = new Stack<>();
+        int i = s.length() - 1;
+        int j = t.length() - 1;
 
-        for (char ch : s.toCharArray()) {
-            if (ch == '#') {
-                if(!stack.isEmpty()){
-                    stack.pop();
+        int skipS = 0;
+        int skipT = 0;
+
+        while (i >= 0 || j >= 0) {
+            // Find the next valid character in s
+            while (i >= 0) {
+                if (s.charAt(i) == '#') {
+                    skipS++;
+                    i--;
+                } else if (skipS > 0) {
+                    skipS--;
+                    i--;
+                } else {
+                    break;
                 }
-            } else {
-
-                stack.push(ch);
             }
-        }
-        Stack<Character> stack2 = new Stack<>();
-        for (char ch : t.toCharArray()) {
-            if (ch == '#') {
-                if(!stack2.isEmpty()){
-                    stack2.pop();
+
+            // Find the next valid character in t
+            while (j >= 0) {
+                if (t.charAt(j) == '#') {
+                    skipT++;
+                    j--;
+                } else if (skipT > 0) {
+                    skipT--;
+                    j--;
+                } else {
+                    break;
                 }
-            } else {
-
-                stack2.push(ch);
             }
+
+            // Compare the two valid characters
+            if (i >= 0 && j >=0) {
+                if (s.charAt(i) != t.charAt(j)) {
+                    return false;
+                }
+            } else if (i >= 0 || j >= 0) {
+                // One string has characters left, the other doesn't
+                return false;
+            }
+
+            i--;
+            j--;
+
+
         }
-
-
-        return stack.equals(stack2);
-        
+        return true;
     }
 }
